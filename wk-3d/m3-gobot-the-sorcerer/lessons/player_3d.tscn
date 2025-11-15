@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3h10x0flhmpm"]
+
+[ext_resource type="PackedScene" uid="uid://cy36aygvs66pn" path="res://assets/skins/gobot/gobot_skin_3d.tscn" id="1_dlncp"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5a1k3"]
+height = 1.1972656
+radius = 0.43408203
+
+[node name="Player3D" type="CharacterBody3D"]
+collision_mask = 10
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5986328, -0.048)
+shape = SubResource("CylinderShape3D_5a1k3")
+
+[node name="GobotSkin3D" parent="." instance=ExtResource("1_dlncp")]
+
+[node name="CameraAnchor" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 0, 5.0658703, 6.2561736)
+fov = 60.0

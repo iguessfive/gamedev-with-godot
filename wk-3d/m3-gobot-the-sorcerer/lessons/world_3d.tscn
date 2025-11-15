@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://danrhj5u1ujxj"]
+
+[ext_resource type="PackedScene" uid="uid://c3h10x0flhmpm" path="res://lessons/player_3d.tscn" id="1_5a1k3"]
+[ext_resource type="Texture2D" uid="uid://brbtohct73mlt" path="res://assets/level/checkboard.png" id="1_hswtk"]
+[ext_resource type="Script" uid="uid://or5jp26cnyik" path="res://lessons/player_3d.gd" id="3_qqb7o"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5a1k3"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_hswtk"]
+sky_material = SubResource("ProceduralSkyMaterial_5a1k3")
+
+[sub_resource type="Environment" id="Environment_qqb7o"]
+background_mode = 2
+sky = SubResource("Sky_hswtk")
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.31, 0.31, 0.31, 1)
+fog_density = 0.0
+fog_sky_affect = 0.5
+fog_height = -1.0
+fog_height_density = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqb7o"]
+albedo_color = Color(0.51, 0.51, 0.51, 1)
+albedo_texture = ExtResource("1_hswtk")
+uv1_triplanar = true
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qqb7o")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.9845721, -0.1484301, -0.092662245, -0.16160318, 0.5682719, 0.8068157, -0.06709837, 0.80934274, -0.58349144, -0.89308786, 8.944997, -14.032003)
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_max_distance = 10.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_override = SubResource("StandardMaterial3D_qqb7o")
+use_collision = true
+collision_layer = 8
+collision_mask = 3
+size = Vector3(10, 2, 10)
+
+[node name="Player3D" parent="." instance=ExtResource("1_5a1k3")]
+script = ExtResource("3_qqb7o")
+
+[editable path="Player3D"]
