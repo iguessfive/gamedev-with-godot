@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://practices/L7.P1/machine_gun.gd" id="1_60gwi"]
+
+[node name="MachineGun" type="Marker3D"]
+script = ExtResource("1_60gwi")
+bullet_scene = null
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
