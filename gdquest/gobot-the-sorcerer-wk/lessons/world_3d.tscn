@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ct3cgmit4ximo" path="res://lessons/player_3d.tscn" id="1_5a1k3"]
 [ext_resource type="Texture2D" uid="uid://brbtohct73mlt" path="res://assets/level/checkboard.png" id="1_hswtk"]
+[ext_resource type="Script" uid="uid://qihf4p8pso2u" path="res://lessons/player_3d.gd" id="3_qqb7o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5a1k3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -27,62 +28,6 @@ albedo_color = Color(0.51, 0.51, 0.51, 1)
 albedo_texture = ExtResource("1_hswtk")
 uv1_triplanar = true
 
-[sub_resource type="GDScript" id="GDScript_hswtk"]
-script/source = "extends CharacterBody3D
-
-const GRAVITY = 40.0 * Vector3.DOWN
-
-@export var max_speed: float = 5.0
-@export var steering_factor: float = 5.0 # direct impact on change in direction
-
-var input = LocalPlayerInputs.new()
-
-var _ground_plane := Plane(Vector3.UP)
-
-@onready var _skin: GobotSkin3D = $GobotSkin3D
-@onready var _camera_3d: Camera3D = %Camera3D
-
-func _init() -> void:
-	input.load_player_inputs()
-
-@warning_ignore(\"unused_parameter\")
-func _physics_process(delta: float) -> void:
-	#region input
-	var input_direction := Input.get_vector(input.move_left(), input.move_right(), input.move_up(), input.move_down())
-	#endregion
-	
-	#region gravity
-	if not is_on_floor():
-		velocity += GRAVITY * delta
-	#endregion
-	
-	#region ground movement
-	var ground_direction := Vector3(input_direction.x, 0, input_direction.y)
-	var desired_ground_velocity := ground_direction * max_speed
-	var steering_vector := desired_ground_velocity - velocity
-	var steering_amount: float = min(steering_factor * delta, 1.0)
-	velocity += steering_vector * steering_amount
-	#endregion
-	
-	#region rotation based on mouse position
-	_ground_plane.d = global_position.y
-	var mouse_position_2d := get_viewport().get_mouse_position()
-	var mouse_ray := _camera_3d.project_ray_normal(mouse_position_2d)
-	var world_mouse_position = _ground_plane.intersects_ray(_camera_3d.global_position, mouse_ray)
-	if world_mouse_position:
-		_skin.look_at(world_mouse_position)
-	#endregion
-	
-	#region animation
-	if is_on_floor() and ground_direction.length() > 0:
-		_skin.run()
-	else:
-		_skin.idle()
-	#endregion
-	
-	move_and_slide()
-"
-
 [node name="Main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -103,7 +48,7 @@ collision_mask = 3
 size = Vector3(10, 2, 10)
 
 [node name="Player3D" parent="." instance=ExtResource("1_5a1k3")]
-script = SubResource("GDScript_hswtk")
+script = ExtResource("3_qqb7o")
 
 [node name="Camera3D" parent="Player3D/CameraAnchor" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 6.796852, 6.537157)
