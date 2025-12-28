@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bu4tmm1wchari"]
+
+[ext_resource type="PackedScene" uid="uid://ct3cgmit4ximo" path="res://lessons/player_3d.tscn" id="1_5a1k3"]
+[ext_resource type="Texture2D" uid="uid://brbtohct73mlt" path="res://assets/level/checkboard.png" id="1_hswtk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5a1k3"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_hswtk"]
+sky_material = SubResource("ProceduralSkyMaterial_5a1k3")
+
+[sub_resource type="Environment" id="Environment_qqb7o"]
+background_mode = 2
+sky = SubResource("Sky_hswtk")
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.31, 0.31, 0.31, 1)
+fog_density = 0.0
+fog_sky_affect = 0.5
+fog_height = -1.0
+fog_height_density = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qqb7o"]
+albedo_color = Color(0.51, 0.51, 0.51, 1)
+albedo_texture = ExtResource("1_hswtk")
+uv1_triplanar = true
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_qqb7o")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.99999994, 7.5710346e-08, -4.371138e-08, 0, 0.49999997, 0.8660254, 8.742277e-08, 0.86602545, -0.49999994, -0.89308786, 13.14504, -14.032003)
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_max_distance = 10.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_override = SubResource("StandardMaterial3D_qqb7o")
+use_collision = true
+collision_layer = 8
+collision_mask = 3
+size = Vector3(10, 2, 10)
+
+[node name="Player3D" parent="." instance=ExtResource("1_5a1k3")]
+
+[node name="Camera3D" parent="Player3D/CameraAnchor" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 6.796852, 6.537157)
+
+[editable path="Player3D"]
