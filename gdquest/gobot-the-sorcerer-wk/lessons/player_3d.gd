@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 	velocity += steering_vector * steering_amount
 	#endregion
 	
-	#region rotation based on mouse position
+	#region body rotation based on mouse position
 	_ground_plane.d = global_position.y
 	var mouse_position_2d := get_viewport().get_mouse_position()
 	var mouse_ray := _camera_3d.project_ray_normal(mouse_position_2d)
@@ -43,6 +43,21 @@ func _physics_process(delta: float) -> void:
 		_skin.look_at(world_mouse_position)
 	#endregion
 	
+	#region leg rotation based on input direction
+	if input_direction.length() > 0.0:
+		var forward_vector := -1.0 * _skin.global_basis.z
+		_skin.hips_rotation = forward_vector.signed_angle_to(ground_direction, Vector3.UP)
+	#endregion
+
+	#region zoom-in & zoom_out
+	var fov = _camera_3d.fov
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_DOWN):
+		_camera_3d.fov = lerpf(fov, 80, 2.0)
+	
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_WHEEL_UP):
+		_camera_3d.fov = lerpf(fov, 40, 2.0)
+	#endregion
+
 	#region animation
 	if is_on_floor() and ground_direction.length() > 0:
 		_skin.run()
