@@ -10,7 +10,7 @@ var _ground_plane := Plane(Vector3.UP)
 @onready var _camera_3d: Camera3D = %Camera3D
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	_ground_plane.d = global_position.y
 
 	if Input.is_action_just_pressed("left_click"):
@@ -21,3 +21,7 @@ func _physics_process(delta: float) -> void:
 
 		# Preload the box scene file, instantiate it, add it as a child of this
 		# node, and set its global position to the projected mouse position.
+		
+		var box: Node3D = preload("res://practices/L5.P3/box.tscn").instantiate()
+		add_child(box)
+		box.global_position = world_mouse_position
