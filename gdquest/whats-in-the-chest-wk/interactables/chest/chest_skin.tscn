@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=3 uid="uid://cltexvf4fg15r"]
+
+[ext_resource type="PackedScene" uid="uid://cigwm1f8cqhcv" path="res://assets/3d_models/chest.glb" id="1_n6lcj"]
+[ext_resource type="Script" uid="uid://7o7pgenmwby" path="res://interactables/chest/chest_skin.gd" id="2_fcas0"]
+[ext_resource type="Material" uid="uid://b6avbstqlwr0e" path="res://interactables/chest/chest_material.tres" id="2_viqb2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_viqb2"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+proximity_fade_enabled = true
+proximity_fade_distance = 0.25
+
+[sub_resource type="QuadMesh" id="QuadMesh_fcas0"]
+size = Vector2(1, 0.6)
+orientation = 1
+
+[sub_resource type="Animation" id="Animation_ba0v8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ChestTopMesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.018277, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gwlfn"]
+resource_name = "open"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 0.7),
+"transitions": PackedFloat32Array(2, 0.5, 2, 0.5, 2),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.2, 0.8, 1.2), Vector3(0.8, 1.2, 0.8), Vector3(1.2, 0.8, 1.2), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ChestTopMesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25, 0.45, 0.575, 0.8),
+"transitions": PackedFloat32Array(2, 2, 2, 2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-2.79253, 0, 0), Vector3(-1.74533, 0, 0), Vector3(-2.0944, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ba0v8"]
+_data = {
+&"RESET": SubResource("Animation_ba0v8"),
+&"open": SubResource("Animation_gwlfn")
+}
+
+[node name="ChestSkin" instance=ExtResource("1_n6lcj")]
+script = ExtResource("2_fcas0")
+
+[node name="ChestBottomMesh" parent="." index="0"]
+material_override = ExtResource("2_viqb2")
+
+[node name="ChestTopMesh" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 0.999833, -0.018275984, 0, 0.018275984, 0.999833, 0, 0.53, -0.33)
+material_override = ExtResource("2_viqb2")
+
+[node name="Shade" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+material_override = SubResource("StandardMaterial3D_viqb2")
+mesh = SubResource("QuadMesh_fcas0")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_ba0v8")
+}

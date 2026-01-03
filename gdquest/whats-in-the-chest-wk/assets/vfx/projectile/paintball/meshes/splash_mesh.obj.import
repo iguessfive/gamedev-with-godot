@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cuilqu3namni8"
+path="res://.godot/imported/splash_mesh.obj-2871d1e322929d264b998775a1080a9d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/splash_mesh.obj-2871d1e322929d264b998775a1080a9d.mesh"]
+
+source_file="res://assets/vfx/projectile/paintball/meshes/splash_mesh.obj"
+dest_files=["res://.godot/imported/splash_mesh.obj-2871d1e322929d264b998775a1080a9d.mesh", "res://.godot/imported/splash_mesh.obj-2871d1e322929d264b998775a1080a9d.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

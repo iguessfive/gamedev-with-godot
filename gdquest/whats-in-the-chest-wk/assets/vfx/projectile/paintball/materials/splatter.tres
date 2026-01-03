@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://bluuqsfq7dm6d"]
+
+[ext_resource type="Shader" uid="uid://cruchfekcrtdq" path="res://vfx/projectile/paintball/materials/splatter.gdshader" id="1_d5wbn"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d5wbn"]
+noise_type = 2
+fractal_type = 0
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d8d6p"]
+noise = SubResource("FastNoiseLite_d5wbn")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_d5wbn")
+shader_parameter/albedo = Color(0.219608, 0.686275, 1, 1)
+shader_parameter/voronoi_sampler = SubResource("NoiseTexture2D_d8d6p")

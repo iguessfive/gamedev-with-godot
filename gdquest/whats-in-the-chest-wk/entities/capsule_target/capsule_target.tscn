@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dnqeeeo0ua77w"]
+
+[ext_resource type="Script" uid="uid://siowxoe5rnjd" path="res://entities/capsule_target/hurt_box_3d.gd" id="1_63vvn"]
+[ext_resource type="Script" uid="uid://df63ruv1l8hnd" path="res://entities/capsule_target/capsule_target.gd" id="1_jf4vp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jf4vp"]
+resource_local_to_scene = true
+albedo_color = Color(0.14, 0.641667, 1, 1)
+roughness = 0.6
+emission_enabled = true
+emission = Color(1, 0.0833333, 0, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jf4vp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fw5pp"]
+
+[node name="CapsuleTarget" type="Node3D"]
+script = ExtResource("1_jf4vp")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="Mesh" type="MeshInstance3D" parent="VisualRoot"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_jf4vp")
+mesh = SubResource("CapsuleMesh_jf4vp")
+skeleton = NodePath("../..")
+
+[node name="HitArea" type="Area3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_63vvn")
+metadata/_custom_type_script = "uid://siowxoe5rnjd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
+shape = SubResource("CapsuleShape3D_fw5pp")

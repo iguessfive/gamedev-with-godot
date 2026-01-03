@@ -1,0 +1,184 @@
+[gd_scene load_steps=16 format=3 uid="uid://dl2bjc8amp0m8"]
+
+[ext_resource type="Shader" uid="uid://cr5yxscg1njng" path="res://assets/vfx/projectile/laser/emission/laser_emission.gdshader" id="1_r3bfo"]
+[ext_resource type="Script" uid="uid://bwyfxmd2mi5mk" path="res://assets/vfx/projectile/laser/emission/laser_emission.gd" id="1_wlyu7"]
+[ext_resource type="Texture2D" uid="uid://jjwlwdgbu1c4" path="res://assets/vfx/projectile/laser/emission/halo.png" id="2_mix8o"]
+[ext_resource type="Material" uid="uid://blw2s4hh0bnvk" path="res://assets/vfx/projectile/laser/laser_projectile/small_spark_mat.tres" id="4_8i3t8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mix8o"]
+render_priority = 0
+shader = ExtResource("1_r3bfo")
+shader_parameter/intensity = 2.5
+shader_parameter/edge_color = Color(0.368627, 0, 1, 1)
+shader_parameter/core_color = Color(0.992157, 0.588235, 1, 1)
+shader_parameter/mask_sampler = ExtResource("2_mix8o")
+
+[sub_resource type="QuadMesh" id="QuadMesh_wlyu7"]
+size = Vector2(0.3, 0.3)
+
+[sub_resource type="Curve" id="Curve_8i3t8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_o4cwy"]
+curve = SubResource("Curve_8i3t8")
+
+[sub_resource type="Curve" id="Curve_o4cwy"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2w1lb"]
+curve = SubResource("Curve_o4cwy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o4cwy"]
+lifetime_randomness = 0.5
+direction = Vector3(0, 0, 1)
+spread = 90.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.5
+gravity = Vector3(0, 0, 0)
+damping_min = 0.1
+damping_max = 0.5
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_2w1lb")
+alpha_curve = SubResource("CurveTexture_o4cwy")
+turbulence_enabled = true
+turbulence_noise_scale = 2.0
+turbulence_influence_min = 0.05
+
+[sub_resource type="QuadMesh" id="QuadMesh_2w1lb"]
+size = Vector2(0.025, 0.025)
+
+[sub_resource type="Animation" id="Animation_wlyu7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Halo:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Halo:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Halo:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SmallSparks:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_mix8o"]
+resource_name = "default"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Halo:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(0.1, 0.1, 0.1), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Halo:transparency")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.00054723, 0.2),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Halo:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(-0.00266038, 0.205321),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.05)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SmallSparks:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wlyu7"]
+_data = {
+&"RESET": SubResource("Animation_wlyu7"),
+&"default": SubResource("Animation_mix8o")
+}
+
+[node name="LaserEmission" type="Node3D"]
+script = ExtResource("1_wlyu7")
+
+[node name="Halo" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_mix8o")
+mesh = SubResource("QuadMesh_wlyu7")
+
+[node name="SmallSparks" type="GPUParticles3D" parent="."]
+material_override = ExtResource("4_8i3t8")
+emitting = false
+amount = 3
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_o4cwy")
+draw_pass_1 = SubResource("QuadMesh_2w1lb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_wlyu7")
+}

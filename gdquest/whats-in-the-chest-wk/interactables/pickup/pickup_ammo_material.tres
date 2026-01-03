@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://d0prsvklaxnm2"]
+
+[ext_resource type="Texture2D" uid="uid://dv46ooufot5ec" path="res://interactables/pickup/ammo_albedo.png" id="1_i4nva"]
+[ext_resource type="Texture2D" uid="uid://c82rih74uria6" path="res://interactables/pickup/ammo_normal.png" id="2_sw7bx"]
+
+[resource]
+albedo_texture = ExtResource("1_i4nva")
+roughness = 0.6
+normal_enabled = true
+normal_texture = ExtResource("2_sw7bx")

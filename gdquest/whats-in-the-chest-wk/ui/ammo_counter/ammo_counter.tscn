@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7pegjj5jl0k7"]
+
+[ext_resource type="Texture2D" uid="uid://bcragsctoeuhw" path="res://ui/icons/bolt_icon.png" id="2_r0qrx"]
+[ext_resource type="AudioStream" uid="uid://dun44i36p3u4y" path="res://assets/audio/low_ammo.wav" id="3_ihfdl"]
+
+[node name="AmmoCounter" type="HBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+offset_right = 256.0
+offset_bottom = 38.0
+theme_override_constants/separation = 8
+
+[node name="BoltIcon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_r0qrx")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Ammunition" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Magazines" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SoundNoAmmo" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_ihfdl")

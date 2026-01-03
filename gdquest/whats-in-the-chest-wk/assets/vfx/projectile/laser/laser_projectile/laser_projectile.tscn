@@ -1,0 +1,28 @@
+[gd_scene load_steps=8 format=3 uid="uid://bld301ims2vy0"]
+
+[ext_resource type="Script" uid="uid://cexeavhf3rnr7" path="res://lessons_reference/player/projectile_visual.gd" id="1_nd2iy"]
+[ext_resource type="PackedScene" uid="uid://cg5ib85s40uk0" path="res://assets/vfx/projectile/laser/impact/impact.tscn" id="2_bf8xo"]
+[ext_resource type="PackedScene" uid="uid://dl2bjc8amp0m8" path="res://assets/vfx/projectile/laser/emission/laser_emission.tscn" id="2_fh13k"]
+[ext_resource type="Material" uid="uid://u4hhduhkvcxs" path="res://assets/vfx/projectile/laser/laser_projectile/laser.tres" id="3_h8itc"]
+[ext_resource type="Material" uid="uid://7786c0mx74di" path="res://assets/vfx/projectile/laser/laser_projectile/laser_head.tres" id="4_fh13k"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_paqbm"]
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="QuadMesh" id="QuadMesh_kt1qi"]
+size = Vector2(0.25, 0.6)
+
+[node name="LaserProjectile" type="Node3D"]
+script = ExtResource("1_nd2iy")
+emission_scene = ExtResource("2_fh13k")
+impact_scene = ExtResource("2_bf8xo")
+
+[node name="Head" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+material_override = ExtResource("4_fh13k")
+mesh = SubResource("QuadMesh_paqbm")
+
+[node name="Tail" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.31134e-07, -7.54979e-08, 1, 1, -4.37114e-08, -1.31134e-07, 4.37114e-08, 1, 7.54979e-08, 0, 0, -0.246128)
+material_override = ExtResource("3_h8itc")
+mesh = SubResource("QuadMesh_kt1qi")

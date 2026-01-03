@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvpy8eltesgvm"]
+
+[ext_resource type="Script" uid="uid://bnji5hmkj7epg" path="res://level/shooting_range/shooting_track.gd" id="1_5nqm8"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_hw8do"]
+size = Vector3(8, 0.1, 0.1)
+
+[sub_resource type="Curve3D" id="Curve3D_5nqm8"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="ShootingTrack" type="Node3D"]
+script = ExtResource("1_5nqm8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_hw8do")
+
+[node name="Path3D" type="Path3D" parent="."]
+unique_name_in_owner = true
+curve = SubResource("Curve3D_5nqm8")

@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6dlilraltmlo"]
+
+[ext_resource type="ArrayMesh" uid="uid://dx0lxxqbu7ulj" path="res://level/shooting_range/silhouette_target_mesh.obj" id="1_ehj2j"]
+[ext_resource type="Script" uid="uid://cbdtba4ixob3l" path="res://level/shooting_range/silhouette_target.gd" id="1_wppin"]
+[ext_resource type="Script" uid="uid://siowxoe5rnjd" path="res://entities/capsule_target/hurt_box_3d.gd" id="3_884lh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_884lh"]
+resource_local_to_scene = true
+albedo_color = Color(0.0627451, 0.69803923, 0.9372549, 1)
+emission_enabled = true
+emission = Color(1, 0.0833333, 0, 1)
+emission_energy_multiplier = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d48tb"]
+size = Vector3(0.680664, 1.67148, 0.2)
+
+[node name="SilhouetteTarget" type="Node3D"]
+script = ExtResource("1_wppin")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="SilhouetteTargetMesh" type="MeshInstance3D" parent="VisualRoot"]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_884lh")
+mesh = ExtResource("1_ehj2j")
+skeleton = NodePath("../..")
+
+[node name="HitArea" type="Area3D" parent="VisualRoot"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("3_884lh")
+metadata/_custom_type_script = "uid://siowxoe5rnjd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="VisualRoot/HitArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0642579, 0)
+shape = SubResource("BoxShape3D_d48tb")
+
+[node name="ActiveTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+autostart = true

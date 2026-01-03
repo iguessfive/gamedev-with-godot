@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvkq00jh3gvbs"]
+
+[ext_resource type="Script" uid="uid://coj1qgu83u31a" path="res://lessons_reference/ui/ammo_counter/bullet_icon.gd" id="1_cif33"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cif33"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="BulletIcon" type="Panel"]
+custom_minimum_size = Vector2(10, 10)
+offset_right = 10.0
+offset_bottom = 10.0
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_cif33")
+script = ExtResource("1_cif33")

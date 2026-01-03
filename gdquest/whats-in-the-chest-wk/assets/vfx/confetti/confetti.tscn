@@ -1,0 +1,53 @@
+[gd_scene load_steps=11 format=3 uid="uid://b7487dt2lfxwb"]
+
+[ext_resource type="Script" uid="uid://bvnk3qde1yauj" path="res://assets/vfx/confetti/confetti.gd" id="1_p1s1g"]
+[ext_resource type="Shader" uid="uid://brdbv2q36gybp" path="res://assets/vfx/confetti/confetti_particles.gdshader" id="1_vvkl1"]
+[ext_resource type="Texture2D" uid="uid://dglkkg018p16f" path="res://assets/shapes_sheet.png" id="2_x72q8"]
+
+[sub_resource type="Gradient" id="Gradient_axf2q"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.4, 0.7)
+colors = PackedColorArray(0.971579, 0.874324, 7.70092e-07, 1, 2.45467e-06, 0.817152, 0.403752, 1, 1, 0.68365, 0.81969, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_djnws"]
+gradient = SubResource("Gradient_axf2q")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kqvhh"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_vvkl1")
+shader_parameter/shapes_sampler = ExtResource("2_x72q8")
+shader_parameter/color_sampler = SubResource("GradientTexture1D_djnws")
+
+[sub_resource type="Curve" id="Curve_j4idr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_c2sxl"]
+curve = SubResource("Curve_j4idr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wwn47"]
+lifetime_randomness = 0.5
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 8.0
+damping_min = 1.0
+damping_max = 4.0
+scale_min = 0.2
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_c2sxl")
+hue_variation_min = -2.2351742e-08
+hue_variation_max = 0.99999994
+
+[sub_resource type="QuadMesh" id="QuadMesh_vencr"]
+
+[node name="Confetti" type="GPUParticles3D"]
+material_override = SubResource("ShaderMaterial_kqvhh")
+emitting = false
+amount = 64
+one_shot = true
+explosiveness = 1.0
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_wwn47")
+draw_pass_1 = SubResource("QuadMesh_vencr")
+script = ExtResource("1_p1s1g")

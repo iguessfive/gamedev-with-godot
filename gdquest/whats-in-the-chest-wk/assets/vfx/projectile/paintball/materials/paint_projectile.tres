@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://w317tu0jbyle"]
+
+[ext_resource type="Shader" uid="uid://dyyupkyqeui1y" path="res://assets/vfx/projectile/paintball/materials/paint_projectile.gdshader" id="1_mrf2u"]
+[ext_resource type="Texture2D" uid="uid://djkhpms50hm" path="res://assets/vfx/projectile/paintball/materials/wave_normal.png" id="2_6kuvp"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_mrf2u")
+shader_parameter/albedo = Color(0.22, 0.688, 1, 1)
+shader_parameter/normal = ExtResource("2_6kuvp")

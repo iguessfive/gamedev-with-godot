@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://brrlkb8pnuq0i"]
+
+[ext_resource type="Shader" uid="uid://bqtj2246umqy1" path="res://entities/player_effect_area/player_effect_area_body.gdshader" id="1_8l5f8"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_8l5f8")
+shader_parameter/albedo = Color(0.1037, 0.61, 0.272467, 1)

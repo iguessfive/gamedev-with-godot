@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cetj7fghwtt5e"]
+
+[ext_resource type="Shader" uid="uid://cooga4hesmfqw" path="res://vfx/projectile/laser/impact/trail_spark.gdshader" id="1_wibvh"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_wibvh")

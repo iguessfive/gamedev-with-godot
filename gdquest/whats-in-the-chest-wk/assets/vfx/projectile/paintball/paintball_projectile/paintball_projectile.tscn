@@ -1,0 +1,54 @@
+[gd_scene load_steps=11 format=3 uid="uid://dxniirwr8sdht"]
+
+[ext_resource type="Script" uid="uid://cexeavhf3rnr7" path="res://lessons_reference/player/projectile_visual.gd" id="1_ms3qc"]
+[ext_resource type="PackedScene" uid="uid://b3xo5yy7kurf1" path="res://assets/vfx/projectile/paintball/emission/paintball_emission.tscn" id="2_xl28x"]
+[ext_resource type="PackedScene" uid="uid://chjnk8a74ubrp" path="res://assets/vfx/projectile/paintball/impact/paintball_impact.tscn" id="3_6554o"]
+[ext_resource type="Material" uid="uid://w317tu0jbyle" path="res://assets/vfx/projectile/paintball/materials/paint_projectile.tres" id="4_hki5b"]
+[ext_resource type="ArrayMesh" uid="uid://tulb2hesjvgo" path="res://assets/vfx/projectile/paintball/meshes/projectile.obj" id="5_qguhf"]
+[ext_resource type="ArrayMesh" uid="uid://dc2ubyamtq2bw" path="res://assets/vfx/projectile/paintball/meshes/small_splatter.obj" id="6_hki5b"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ne858"]
+radius = 0.2
+
+[sub_resource type="Curve" id="Curve_lt3m4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hs21v"]
+curve = SubResource("Curve_lt3m4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4jjc4"]
+lifetime_randomness = 0.8
+direction = Vector3(0, 0, -1)
+spread = 60.0
+initial_velocity_min = 4.0
+initial_velocity_max = 10.0
+damping_min = 0.5
+damping_max = 2.0
+scale_min = 0.02
+scale_max = 0.04
+scale_curve = SubResource("CurveTexture_hs21v")
+
+[node name="PaintballProjectile" type="Area3D"]
+script = ExtResource("1_ms3qc")
+speed = 20.0
+gravity_falloff = 10.0
+emission_scene = ExtResource("2_xl28x")
+impact_scene = ExtResource("3_6554o")
+metadata/_custom_type_script = "uid://cexeavhf3rnr7"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ne858")
+
+[node name="Projectile" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, -4.37114e-09, -0.1, 0, 0.1, -4.37114e-09, 0, 0, 0)
+material_override = ExtResource("4_hki5b")
+mesh = ExtResource("5_qguhf")
+
+[node name="Droplets" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.08114)
+material_override = ExtResource("4_hki5b")
+lifetime = 0.6
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_4jjc4")
+draw_pass_1 = ExtResource("6_hki5b")

@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b1t3bj58kfamd"]
+
+[ext_resource type="Shader" uid="uid://cu70seu63gixm" path="res://assets/vfx/projectile/paintball/materials/splash.gdshader" id="1_r6a4o"]
+[ext_resource type="Texture2D" uid="uid://blsa33nave6sa" path="res://assets/vfx/projectile/paintball/materials/splash_sampler.png" id="2_vcvda"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_r6a4o")
+shader_parameter/splash_sampler = ExtResource("2_vcvda")
+shader_parameter/albedo = Color(0.219608, 0.686275, 1, 1)
+shader_parameter/dissolve = 1.0
+shader_parameter/uv_offset = 0.8
+shader_parameter/uv_scale = Vector2(0.5, 1)

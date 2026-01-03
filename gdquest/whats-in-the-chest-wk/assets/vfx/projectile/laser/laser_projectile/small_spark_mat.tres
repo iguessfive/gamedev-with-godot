@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://blw2s4hh0bnvk"]
+
+[ext_resource type="Shader" uid="uid://bvu7dyg2s6uxc" path="res://assets/vfx/projectile/laser/laser_projectile/small_spark.gdshader" id="1_eetfy"]
+[ext_resource type="Texture2D" uid="uid://bx2wbc4b2pe6" path="res://assets/vfx/projectile/laser/laser_projectile/shine.png" id="2_su48f"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_eetfy")
+shader_parameter/edge_color = Color(0.368627, 0, 1, 1)
+shader_parameter/core_color = Color(0.992157, 0.588235, 1, 1)
+shader_parameter/mask_sampler = ExtResource("2_su48f")

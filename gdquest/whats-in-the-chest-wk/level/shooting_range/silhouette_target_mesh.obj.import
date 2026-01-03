@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dx0lxxqbu7ulj"
+path="res://.godot/imported/silhouette_target_mesh.obj-6bc28a18348b07a78ff10ff2f39d96ee.mesh"
+
+[deps]
+
+files=["res://.godot/imported/silhouette_target_mesh.obj-6bc28a18348b07a78ff10ff2f39d96ee.mesh"]
+
+source_file="res://level/shooting_range/silhouette_target_mesh.obj"
+dest_files=["res://.godot/imported/silhouette_target_mesh.obj-6bc28a18348b07a78ff10ff2f39d96ee.mesh", "res://.godot/imported/silhouette_target_mesh.obj-6bc28a18348b07a78ff10ff2f39d96ee.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

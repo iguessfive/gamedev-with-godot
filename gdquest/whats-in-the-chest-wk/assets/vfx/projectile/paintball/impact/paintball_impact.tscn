@@ -1,0 +1,162 @@
+[gd_scene load_steps=12 format=3 uid="uid://chjnk8a74ubrp"]
+
+[ext_resource type="Script" uid="uid://co6t24s7oke14" path="res://assets/vfx/projectile/paintball/impact/paintball_impact.gd" id="1_lr1c1"]
+[ext_resource type="Material" uid="uid://w317tu0jbyle" path="res://assets/vfx/projectile/paintball/materials/paint_projectile.tres" id="2_vaxx0"]
+[ext_resource type="ArrayMesh" uid="uid://dc2ubyamtq2bw" path="res://assets/vfx/projectile/paintball/meshes/small_splatter.obj" id="3_eu1cb"]
+[ext_resource type="Material" uid="uid://b1t3bj58kfamd" path="res://assets/vfx/projectile/paintball/materials/splash_mat.tres" id="4_vdei4"]
+[ext_resource type="ArrayMesh" uid="uid://cuilqu3namni8" path="res://assets/vfx/projectile/paintball/meshes/splash_mesh.obj" id="4_ykcrw"]
+
+[sub_resource type="Curve" id="Curve_eu1cb"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_eu1cb"]
+curve = SubResource("Curve_eu1cb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eu1cb"]
+lifetime_randomness = 0.5
+direction = Vector3(0, 0, -1)
+spread = 25.0
+initial_velocity_min = 4.0
+initial_velocity_max = 10.0
+scale_min = 0.04
+scale_max = 0.05
+scale_curve = SubResource("CurveTexture_eu1cb")
+
+[sub_resource type="Animation" id="Animation_wbgbr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Droplets:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualRoot:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VisualRoot/SplashMesh:material_override:shader_parameter/dissolve")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VisualRoot/SplashMesh:material_override:shader_parameter/uv_offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.8]
+}
+
+[sub_resource type="Animation" id="Animation_ccut1"]
+resource_name = "default"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Droplets:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualRoot:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector3(0.1, 0.1, 0.1), Vector3(1.5, 1.5, 1.8)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VisualRoot/SplashMesh:material_override:shader_parameter/dissolve")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VisualRoot/SplashMesh:material_override:shader_parameter/uv_offset")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [0.0, 0.8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3e04q"]
+_data = {
+&"RESET": SubResource("Animation_wbgbr"),
+&"default": SubResource("Animation_ccut1")
+}
+
+[node name="PaintballImpact" type="Node3D"]
+script = ExtResource("1_lr1c1")
+
+[node name="Droplets" type="GPUParticles3D" parent="."]
+material_override = ExtResource("2_vaxx0")
+emitting = false
+amount = 6
+one_shot = true
+explosiveness = 1.0
+transform_align = 2
+process_material = SubResource("ParticleProcessMaterial_eu1cb")
+draw_pass_1 = ExtResource("3_eu1cb")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0, 0, 0)
+
+[node name="SplashMesh" type="MeshInstance3D" parent="VisualRoot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -7.54979e-08, 0, 1.13999e-14)
+material_override = ExtResource("4_vdei4")
+mesh = ExtResource("4_ykcrw")
+skeleton = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_3e04q")
+}
